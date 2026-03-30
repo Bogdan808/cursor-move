@@ -1,0 +1,56 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+LIBEXEC="%%LIBEXEC%%"
+
+if [ "$LIBEXEC" = "%%""LIBEXEC""%%"  ]; then
+  LIBEXEC="$(cd "$(dirname "$0")/../lib" && pwd)"
+fi
+
+case "${1:-}" in
+  --setup)
+    shift
+    exec node "$LIBEXEC/setup.js" "$@"
+    ;;
+  --install-ext)
+    CURSOR_CLI="/Applications/Cursor.app/Contents/Resources/app/bin/cursor"
+    if [ -f "$LIBEXEC/cursor-move-file.vsix" ]; then
+      VSIX="$LIBEXEC/cursor-move-file.vsix"
+    else
+      VSIX_DIR="$(cd "$(dirname "$0")/../dist" && pwd)"
+      VSIX="$VSIX_DIR/cursor-move-file.vsix"
+    fi
+    if [ ! -f "$VSIX" ]; then
+      echo "Error: VSIX not found at $VSIX" >&2
+      exit 1
+    fi
+    if [ ! -f "$CURSOR_CLI" ]; then
+      echo "Error: Cursor CLI not found at $CURSOR_CLI" >&2
+      echo "Is Cursor installed in /Applications?" >&2
+      exit 1
+    fi
+    "$CURSOR_CLI" --install-extension "$VSIX"
+    echo "Extension installed. Reload your Cursor window to activate."
+    ;;
+  --help|-h|"")
+    echo "cursor-move — Move files in Cursor with automatic import updates"
+    echo ""
+    echo "Usage:"
+    echo "  cursor-move <source> <destination>    Move a file (relative to cwd)"
+    echo "  cursor-move --setup                   Add required VS Code setting to .vscode/settings.json"
+    echo "  cursor-move --install-ext             Install the VS Code extension into Cursor"
+    echo "  cursor-move --help                    Show this help"
+    echo ""
+    echo "Examples:"
+    echo "  cursor-move src/utils/api.ts src/services/api.ts"
+    echo "  cursor-move components/Button.tsx components/ui/Button.tsx"
+    ;;
+  -*)
+    echo "Unknown flag: $1" >&2
+    echo "Run 'cursor-move --help' for usage." >&2
+    exit 1
+    ;;
+  *)
+    exec node "$LIBEXEC/move-file.js" "$@"
+    ;;
+esac

@@ -1,0 +1,25 @@
+{
+  "name": "cursor-move-file",
+  "displayName": "Cursor Move File",
+  "description": "Moves files via WorkspaceEdit.renameFile() so the TypeScript language server updates imports automatically. Designed for AI agent workflows.",
+  "version": "0.1.0",
+  "publisher": "cursor-move",
+  "engines": {
+    "vscode": "^1.80.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "cursorMove.moveFile",
+        "title": "Move File (Agent Tool)"
+      }
+    ]
+  }
+}
