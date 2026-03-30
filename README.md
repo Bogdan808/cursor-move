@@ -113,6 +113,16 @@ make uninstall
 - **Node.js** >= 18
 - **Cursor IDE** installed in `/Applications/Cursor.app`
 
+## Publish to GitHub (maintainer)
+
+Creates `Bogdan808/cursor-move` and `Bogdan808/homebrew-cursor-move`, pushes tag `v0.1.0`, and fills in the formula `sha256`.
+
+```bash
+brew install gh   # if needed
+gh auth login
+./scripts/publish.sh
+```
+
 ## License
 
 MIT
