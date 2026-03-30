@@ -17,7 +17,12 @@ fi
 
 cd "$ROOT"
 
-if ! git remote get-url origin >/dev/null 2>&1; then
+if gh repo view Bogdan808/cursor-move >/dev/null 2>&1; then
+  if ! git remote get-url origin >/dev/null 2>&1; then
+    git remote add origin "https://github.com/Bogdan808/cursor-move.git"
+  fi
+  git push -u origin main
+elif ! git remote get-url origin >/dev/null 2>&1; then
   gh repo create Bogdan808/cursor-move --public --source=. --remote=origin --push
 else
   git push -u origin main
@@ -54,7 +59,12 @@ git branch -m main 2>/dev/null || true
 git add Formula/cursor-move.rb
 git commit -m "Set formula sha256 for ${TAG}" || true
 
-if ! git remote get-url origin >/dev/null 2>&1; then
+if gh repo view Bogdan808/homebrew-cursor-move >/dev/null 2>&1; then
+  if ! git remote get-url origin >/dev/null 2>&1; then
+    git remote add origin "https://github.com/Bogdan808/homebrew-cursor-move.git"
+  fi
+  git push -u origin main
+elif ! git remote get-url origin >/dev/null 2>&1; then
   gh repo create Bogdan808/homebrew-cursor-move --public --source=. --remote=origin --push
 else
   git push -u origin main
