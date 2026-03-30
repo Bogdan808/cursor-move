@@ -5,7 +5,7 @@ class CursorMove < Formula
   desc "Move files in Cursor IDE with automatic import updates — built for AI agents"
   homepage "https://github.com/Bogdan808/cursor-move"
   url "https://github.com/Bogdan808/cursor-move/archive/refs/tags/v0.1.0.tar.gz"
-  sha256 "REPLACE_WITH_SHA256_AFTER_GITHUB_RELEASE"
+  sha256 "dc62880916052cce0ac0575e33cc202e3081d930f00e3f9fe9867d627390a662"
   license "MIT"
 
   depends_on "node"
