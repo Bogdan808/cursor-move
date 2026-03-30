@@ -10,6 +10,10 @@ breaks git history (delete + create instead of rename) and is error-prone.
 `WorkspaceEdit.renameFile()` API through a lightweight VS Code extension. The
 TypeScript language server then updates every import automatically.
 
+## For AI agents (Cursor, Codex, Claude, …)
+
+If you are an **agent** or you maintain agent instructions, use the standalone skill doc **[FileMoveByCursor.md](./FileMoveByCursor.md)** — when to use `cursor-move`, prerequisites, workflow, and anti-patterns. Point tools or rules at that file so every assistant follows the same rename flow.
+
 ## Install
 
 ### Homebrew (recommended)
